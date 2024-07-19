@@ -97,3 +97,14 @@ function Cart() {
   }, []);
 
   const finalPrice = totalPrice + tax;
+
+  return (
+    <section className="bg-light my-5">
+      <div className="container">
+        <div className="row">
+          {/* cart */}
+          <div className="col-lg-9">
+            <div className="card border shadow-0">
+              <div className="m-4">
+                <h4 className="card-title mb-4">Your shopping cart</h4>
+                {cartItems.map((item) => (

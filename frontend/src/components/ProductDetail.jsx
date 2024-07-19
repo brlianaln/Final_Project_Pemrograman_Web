@@ -84,3 +84,42 @@ const ProductDetail = () => {
   if (!bookData) {
     return <div>Product not found</div>;
   }
+  
+  return (
+    <section className="py-5" style={{ backgroundColor: "white" }}>
+      <div className="container">
+        <div className="row gx-5">
+          <aside className="col-lg-6">
+            <div className="border rounded-4 mb-3 d-flex justify-content-center">
+              <img
+                src={bookData.image}
+                style={{ maxWidth: "50%", maxHeight: "100vh", marginTop: "20px", marginBottom: "20px" }}
+                alt="Main Product"
+              />
+            </div>
+          </aside>
+
+          <main className="col-lg-6">
+            <div className="ps-lg-3">
+              <p className="author" style={{ fontSize: "15px" }}>{bookData.author}</p>
+              <h4 className="title" style={{ fontWeight: "bold", color: "black" }}>{bookData.title}</h4>
+              <div className="d-flex flex-row my-3">
+                <div className="text-warning mb-1 me-2">
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fa fa-star"></i>
+                  <i className="fas fa-star-half-alt"></i>
+                  <span className="ms-1">4.5</span>
+                </div>
+                <span className="text-muted">
+                  <i className="fas fa-shopping-basket fa-sm mx-1"></i>
+                </span>
+                <span className="text-success ms-2">In stock</span>
+              </div>
+              <div className="mb-3">
+                <span className="h5" style={{ fontSize: "15px", fontWeight: "bold" }}>{formatPrice(bookData.price)}</span>
+                <span className="text-muted">/per buku</span>
+              </div>
+              <p>{bookData.description}</p>
+              <div className="row"></div>

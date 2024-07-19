@@ -52,3 +52,48 @@ function Cart() {
       }
     });
     setTotalPrice(total);
+  };
+
+  // Handle checkout
+  const handleCheckout = () => {
+    if (checkedItems.length === 0) {
+      swal("Gagal!", "Please select at least one item to checkout.", "error");
+      return;
+    }
+    const itemsToCheckout = cartItems.filter(item => checkedItems.includes(item.id));
+    localStorage.setItem("checkoutItems", JSON.stringify(itemsToCheckout));
+    navigate("/Checkout");
+  };
+
+ 
+  const handleCheckChange = (id) => {
+    const newCheckedItems = checkedItems.includes(id)
+      ? checkedItems.filter(itemId => itemId !== id)
+      : [...checkedItems, id];
+    
+    setCheckedItems(newCheckedItems);
+    updateTotalPrice(cartItems, newCheckedItems);
+  };
+
+  // Format price
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      currencyDisplay: "symbol",
+    }).format(price);
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3500/cart")
+      .then((res) => {
+        setCartItems(res.data);
+        updateTotalPrice(res.data, checkedItems); 
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const finalPrice = totalPrice + tax;

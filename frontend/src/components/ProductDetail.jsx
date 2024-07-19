@@ -123,3 +123,41 @@ const ProductDetail = () => {
               </div>
               <p>{bookData.description}</p>
               <div className="row"></div>
+              <div className="quantity-container">
+                  <button className="quantity-btn" onClick={handleDecrement}>-</button>
+                  <input type="number" value={quantity} readOnly />
+                  <button className="quantity-btn" onClick={handleIncrement}>+</button>
+                </div>
+              </div>
+              <hr />
+              
+              <a 
+                type="submit" 
+                className="btn btn-primary shadow-0" 
+                style={{ fontWeight: "bold", margin: "10px" }} 
+                onClick={() => addToCart(bookData)}
+              >
+                <ShoppingCart /> ADD TO CART
+              </a>
+              <Bookmark />
+            </div>
+          </main>
+        </div>
+
+        <div className="row mt-5">
+          <div className="col-lg-8">
+            <h3 style={{ fontWeight: "bold", color: "black" }}>Sinopsis</h3>
+            <p>{bookData.synopsis}</p>
+          </div>
+
+          <div className="col-lg-4">
+            <h4 style={{ fontWeight: "bold", color: "black" }}>Detail</h4>
+            <div>{bookData.detail}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ProductDetail;

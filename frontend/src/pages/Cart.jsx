@@ -162,4 +162,4 @@ function Cart() {
                ))}
              </div>
 
-             <div className="border-top pt-4 mx-4 mb-4">
+             <div className="border-top pt-4 mx-4 mb-4"></div>

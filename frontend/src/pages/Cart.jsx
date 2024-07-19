@@ -108,3 +108,58 @@ function Cart() {
               <div className="m-4">
                 <h4 className="card-title mb-4">Your shopping cart</h4>
                 {cartItems.map((item) => (
+                   <div className="row gy-3 mb-4 d-flex" style={{ alignItems: 'center' }} key={item.id}>
+                   <div className="col-lg-1">
+                     <input
+                       type="checkbox"
+                       checked={checkedItems.includes(item.id)}
+                       onChange={() => handleCheckChange(item.id)}
+                     />
+                   </div>
+                   <div className="col-lg-7">
+                     <div className="me-lg-5">
+                       <div className="d-flex" style={{alignItems:"center"}}>
+                         <div className="product-img d-flex" style={{ alignItems: 'center' }}>
+                           <img
+                             src={item.image}
+                             className="img-fluid rounded-3"
+                             style={{ width: '125px', height: '125px', objectFit: "contain" }}
+                             alt={item.name}
+                           />
+                         </div>
+                         <div className="product-info" style={{ marginLeft: '20px' }}>
+                           <a href="#" className="nav-link" style={{ fontWeight: 'bold' }}>
+                             {item.title}
+                           </a>
+                           <p className="text-muted">{item.author}</p>
+                           <p className="text-muted">{item.details}</p>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                   <div className="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+                     <div>
+                       <input
+                         className="quantity-input"
+                         style={{ borderRadius: "5px" }}
+                         type="number"
+                         value={item.quantity || 1}
+                         min="1"
+                         onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
+                         autoComplete="off"
+                       />
+                     </div>
+                     <div>
+                       <span className="price">{formatPrice(item.price * (item.quantity || 1))}</span>
+                     </div>
+                   </div>
+                   <div className="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
+                     <div className="float-md-end">
+                       <Trash2 onClick={() => handleRemoveItem(item.id)} />
+                     </div>
+                   </div>
+                 </div>
+               ))}
+             </div>
+
+             <div className="border-top pt-4 mx-4 mb-4">

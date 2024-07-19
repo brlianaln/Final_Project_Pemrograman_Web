@@ -10,7 +10,7 @@ function Team() {
         { id: 3, name: 'Eleonora Inez Febri Almanta', role: 'Back end', image: '/image/3(sq).jpg',nim :'22.11.4697' },
         { id: 4, name: 'Sekar Taji Palupi', role: 'Fornt end', image: '/image/4(sq).jpeg',nim :'22.11.4716' },
         { id: 5, name: 'Aryant Barbaryant A', role: 'Fornt end ', image: '/image/1(sq).jpg' ,nim :'22.11.4686'},
-        { id: 6, name: 'Fadila Rahman', role: 'Back End', image: '/image/5(sq).jpeg' ,nim :'22.11.47'}
+        { id: 6, name: 'Fadila Rahman', role: 'Back End', image: '/image/5(sq).jpeg' ,nim :'22.11.4735'}
     ];
 
    

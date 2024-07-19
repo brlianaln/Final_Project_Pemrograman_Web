@@ -84,7 +84,7 @@ const ProductDetail = () => {
   if (!bookData) {
     return <div>Product not found</div>;
   }
-  
+
   return (
     <section className="py-5" style={{ backgroundColor: "white" }}>
       <div className="container">
@@ -122,8 +122,8 @@ const ProductDetail = () => {
                 <span className="text-muted">/per buku</span>
               </div>
               <p>{bookData.description}</p>
-              <div className="row"></div>
-              <div className="quantity-container">
+              <div className="row">
+                <div className="quantity-container">
                   <button className="quantity-btn" onClick={handleDecrement}>-</button>
                   <input type="number" value={quantity} readOnly />
                   <button className="quantity-btn" onClick={handleIncrement}>+</button>

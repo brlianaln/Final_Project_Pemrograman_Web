@@ -16,6 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id'); // foreign key referencing the users table
             $table->float('total_price')->default(0); // calculated column
             
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 

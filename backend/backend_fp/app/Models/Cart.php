@@ -14,15 +14,15 @@ class Cart extends Model
         "quantity"
     ];
 
-    public function hasUsers()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // public function hasUsers()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 
-    // One-to-Many with Item
-    public function hasItems()
-    {
-        return $this->hasMany(Item::class);
-    }
+    // // One-to-Many with Item
+    // public function hasItems()
+    // {
+    //     return $this->hasMany(Item::class);
+    // }
 
 }

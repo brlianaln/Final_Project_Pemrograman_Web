@@ -60,18 +60,17 @@ function Cart() {
       swal("Gagal!", "Please select at least one item to checkout.", "error");
       return;
     }
-    const itemsToCheckout = cartItems.filter((item) =>
-      checkedItems.includes(item.id)
-    );
+    const itemsToCheckout = cartItems.filter(item => checkedItems.includes(item.id));
     localStorage.setItem("checkoutItems", JSON.stringify(itemsToCheckout));
     navigate("/Checkout");
   };
 
+ 
   const handleCheckChange = (id) => {
     const newCheckedItems = checkedItems.includes(id)
-      ? checkedItems.filter((itemId) => itemId !== id)
+      ? checkedItems.filter(itemId => itemId !== id)
       : [...checkedItems, id];
-
+    
     setCheckedItems(newCheckedItems);
     updateTotalPrice(cartItems, newCheckedItems);
   };
@@ -90,7 +89,7 @@ function Cart() {
       .get("http://localhost:3500/cart")
       .then((res) => {
         setCartItems(res.data);
-        updateTotalPrice(res.data, checkedItems);
+        updateTotalPrice(res.data, checkedItems); 
       })
       .catch((err) => {
         console.log(err);
@@ -109,11 +108,7 @@ function Cart() {
               <div className="m-4">
                 <h4 className="card-title mb-4">Your shopping cart</h4>
                 {cartItems.map((item) => (
-                  <div
-                    className="row gy-3 mb-4 d-flex"
-                    style={{ alignItems: "center" }}
-                    key={item.id}
-                  >
+                  <div className="row gy-3 mb-4 d-flex" style={{ alignItems: 'center' }} key={item.id}>
                     <div className="col-lg-1">
                       <input
                         type="checkbox"
@@ -123,34 +118,17 @@ function Cart() {
                     </div>
                     <div className="col-lg-7">
                       <div className="me-lg-5">
-                        <div
-                          className="d-flex"
-                          style={{ alignItems: "center" }}
-                        >
-                          <div
-                            className="product-img d-flex"
-                            style={{ alignItems: "center" }}
-                          >
+                        <div className="d-flex" style={{alignItems:"center"}}>
+                          <div className="product-img d-flex" style={{ alignItems: 'center' }}>
                             <img
                               src={item.image}
                               className="img-fluid rounded-3"
-                              style={{
-                                width: "125px",
-                                height: "125px",
-                                objectFit: "contain",
-                              }}
+                              style={{ width: '125px', height: '125px', objectFit: "contain" }}
                               alt={item.name}
                             />
                           </div>
-                          <div
-                            className="product-info"
-                            style={{ marginLeft: "20px" }}
-                          >
-                            <a
-                              href="#"
-                              className="nav-link"
-                              style={{ fontWeight: "bold" }}
-                            >
+                          <div className="product-info" style={{ marginLeft: '20px' }}>
+                            <a href="#" className="nav-link" style={{ fontWeight: 'bold' }}>
                               {item.title}
                             </a>
                             <p className="text-muted">{item.author}</p>
@@ -167,19 +145,12 @@ function Cart() {
                           type="number"
                           value={item.quantity || 1}
                           min="1"
-                          onChange={(e) =>
-                            handleQuantityChange(
-                              item.id,
-                              parseInt(e.target.value)
-                            )
-                          }
+                          onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
                           autoComplete="off"
                         />
                       </div>
                       <div>
-                        <span className="price">
-                          {formatPrice(item.price * (item.quantity || 1))}
-                        </span>
+                        <span className="price">{formatPrice(item.price * (item.quantity || 1))}</span>
                       </div>
                     </div>
                     <div className="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
@@ -191,19 +162,14 @@ function Cart() {
                 ))}
               </div>
 
-<<<<<<< HEAD
-             <div className="border-top pt-4 mx-4 mb-4"></div>
-=======
               <div className="border-top pt-4 mx-4 mb-4">
                 <p>
-                  <i className="fas fa-truck text-muted fa-lg"></i> Free
-                  Delivery within 1-2 weeks
+                  <i className="fas fa-truck text-muted fa-lg"></i> Free Delivery within 1-2 weeks
                 </p>
                 <p className="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip
                 </p>
               </div>
             </div>
@@ -215,7 +181,7 @@ function Cart() {
             <div className="card shadow-0 border">
               <div className="card-body">
                 <h4 className="card-title mb-4">Order Summary</h4>
-                <hr style={{ fontSize: "20px", color: "black" }}></hr>
+                <hr style={{ fontSize: '20px', color: "black" }}></hr>
                 <div className="d-flex justify-content-between">
                   <p className="mb-2">Total price:</p>
                   <p className="mb-2">{formatPrice(totalPrice)}</p>
@@ -231,26 +197,10 @@ function Cart() {
                 </div>
 
                 <div className="mt-3">
-                  <button
-                    className="btn btn-success w-100 shadow-0 mb-2"
-                    style={{
-                      backgroundColor: "#006769",
-                      borderRadius: "5px",
-                      border: "0",
-                    }}
-                    onClick={handleCheckout}
-                  >
+                  <button className="btn btn-success w-100 shadow-0 mb-2" style={{ backgroundColor: '#006769', borderRadius: "5px", border: '0' }} onClick={handleCheckout}>
                     Checkout
                   </button>
-                  <Link
-                    className="btn w-100 mt-2"
-                    to="/Shop"
-                    style={{
-                      backgroundColor: " #f9bf29",
-                      borderRadius: "5px",
-                      border: "0",
-                    }}
-                  >
+                  <Link className="btn w-100 mt-2" to="/Shop" style={{ backgroundColor: ' #f9bf29', borderRadius: "5px", border: '0' }}>
                     Back to shop
                   </Link>
                 </div>
@@ -265,4 +215,3 @@ function Cart() {
 }
 
 export default Cart;
->>>>>>> 26d818ae253865f1d04e6648dc254fd4d6227a9d

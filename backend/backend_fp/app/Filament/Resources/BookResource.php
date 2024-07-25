@@ -46,10 +46,6 @@ class BookResource extends Resource
                 FileUpload::make('image')
                     ->image(),
 
-                TextInput::make('detail')
-                    ->label('Detail')
-                    ->required(),
-
                 Textarea::make('synopsis')
                     ->label('Synopsis')
                     ->required(),
@@ -58,7 +54,7 @@ class BookResource extends Resource
                     ->label('Description')
                     ->required(),
 
-                TextInput::make('format')
+                    TextInput::make('format')
                     ->label('Format')
                     ->required(),
 
@@ -95,8 +91,6 @@ class BookResource extends Resource
                     ->label('Category'),
                 TextColumn::make('image')
                     ->label('Image'),
-                TextColumn::make('detail')
-                    ->label('Detail'),
                 TextColumn::make('synopsis')
                     ->label('Synopsis'),
                 TextColumn::make('description')

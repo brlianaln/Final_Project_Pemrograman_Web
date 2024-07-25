@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('author');
             $table->string('image');
             $table->unsignedBigInteger('category_id');
-            $table->text('detail');
             $table->text('synopsis');
             $table->text('description');
             $table->string('format');

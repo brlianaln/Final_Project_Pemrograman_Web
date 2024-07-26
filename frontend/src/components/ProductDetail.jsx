@@ -15,8 +15,8 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchBookData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3500/products/${id}`);
-        const book = response.data;
+        const response = await axios.get(`https://literaryroom.com/api/books/${id}`);
+        const book = response.data.books;
         setBookData(book);
         setLoading(false);
       } catch (error) {
@@ -92,7 +92,7 @@ const ProductDetail = () => {
           <aside className="col-lg-6">
             <div className="border rounded-4 mb-3 d-flex justify-content-center">
               <img
-                src={bookData.image}
+                src={`https://literaryroom.com/storage/${bookData.image}`}
                 style={{ maxWidth: "50%", maxHeight: "100vh", marginTop: "20px", marginBottom: "20px" }}
                 alt="Main Product"
               />

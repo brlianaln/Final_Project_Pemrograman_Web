@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Pagination from 'react-bootstrap/Pagination'; 
 
 function Shop() {
-  const url = "http://localhost:5000/api/product";
+  const url = "https://literaryroom.com/api/books";
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All Books");
@@ -18,11 +18,11 @@ function Shop() {
     try {
       const response = await fetch(url);
       const dataProduct = await response.json();
-      setProducts(dataProduct);
+      setProducts(dataProduct.books);
 
       const uniqueCategories = [
         "All Books",
-        ...new Set(dataProduct.map((product) => product.category)),
+        ...new Set(dataProduct.books.map((product) => product.category.name)),
       ];
       setCategories(uniqueCategories);
     } catch (error) {
@@ -42,7 +42,7 @@ function Shop() {
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
       const matchesCategory =
-        selectedCategory === "All Books" || product.category === selectedCategory;
+        selectedCategory === "All Books" || product.category.name === selectedCategory;
       const matchesSearch = product.title
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
@@ -145,7 +145,7 @@ function CardProduct({ id, title, price, author, image }) {
     <Card style={{ width: "183px" }}>
       <Container>
         <Link to={`/ProductDetail/${id}`}>
-          <Card.Img variant="top" src={image} style={{ objectFit: "contain" }} />
+          <Card.Img variant="top" src={`https://literaryroom.com/storage/${image}`} style={{ objectFit: "contain" }} />
         </Link>
         <Card.Body>
           <Card.Title style={{ fontSize: "15px" }}>{title}</Card.Title>

@@ -17,7 +17,7 @@ function SignUp({ show, handleClose }) {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/users", {
+      await axios.post("http://localhost:8000/api/register", {
         email,password
       });
       console.log("sukses");

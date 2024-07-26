@@ -1,23 +1,40 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import SignUp from './SignUp';
+import axios from 'axios';
 
 function Login({ show, handleClose }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showRegisterForm, setShowRegisterForm] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
-    handleClose();
+    setErrorMessage(''); // Reset error message before making the request
+    try {
+      const response = await axios.post('http://localhost:8000/api/login', {
+        email,
+        password,
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      if (response.data.success) {
+        // Handle successful login
+        console.log('Login successful:', response.data);
+        handleClose();
+      } else {
+        setErrorMessage('Login failed. Please check your email and password.');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      if (error.response && error.response.status === 422) {
+        setErrorMessage('Invalid email or password.');
+      } else {
+        setErrorMessage('An error occurred. Please try again later.');
+      }
+    }
   };
-
-  const registerFormHandleHide = () => setShowRegisterForm(false);
-  const registerFormHandleShow = () => setShowRegisterForm(true)
 
   return (
     <Modal show={show} onHide={handleClose} centered>
@@ -25,6 +42,7 @@ function Login({ show, handleClose }) {
         <Modal.Title className="w-100 text-center">Login</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
@@ -52,7 +70,6 @@ function Login({ show, handleClose }) {
             Login
           </Button>
         </Form>
-       
         <div className="modal-footer d-flex justify-content-center mt-3">
           <div className="signup-section">Not a member yet? <a href="#a" className="text-info">sign up</a>.</div>
         </div>
